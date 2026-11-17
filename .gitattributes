@@ -1,0 +1,2 @@
+# Sidecar hashes are computed over exact bytes: never let git rewrite line endings.
+* -text

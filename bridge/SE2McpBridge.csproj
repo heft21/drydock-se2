@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <Nullable>disable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <AssemblyName>SE2McpBridge</AssemblyName>
+    <RootNamespace>SE2McpBridge</RootNamespace>
+    <EnableDynamicLoading>true</EnableDynamicLoading>
+    <!-- The editor ships Microsoft.CodeAnalysis(.CSharp) 4.14 but NOT the
+         Scripting assemblies, so package output has to travel with the plugin.
+         Versions are pinned to the editor's, and the runtime binds to whatever
+         is already loaded, so the duplicate copies stay inert. -->
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+    <NoWarn>$(NoWarn);CS0436;NU1701</NoWarn>
+  </PropertyGroup>
+
+  <!-- Path to the Mod SDK's Editor folder; override with -p:EditorDir=... -->
+  <PropertyGroup>
+    <EditorDir Condition="'$(EditorDir)' == ''">C:\Program Files (x86)\Steam\steamapps\common\Space Engineers 2 - Mod SDK\Editor</EditorDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Private=false: reference for compilation only. At run time these types
+         come from the assemblies the editor itself already loaded, which is the
+         only way the plugin can see the editor's live objects. -->
+    <Reference Include="VRage.Plugin.Editor"><HintPath>$(EditorDir)\VRage.Plugin.Editor.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="VRage.Library"><HintPath>$(EditorDir)\VRage.Library.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="VRage.Editor"><HintPath>$(EditorDir)\VRage.Editor.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="VRage.UI.Shared"><HintPath>$(EditorDir)\VRage.UI.Shared.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="VRage.Core"><HintPath>$(EditorDir)\VRage.Core.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="VRage.Core.Game"><HintPath>$(EditorDir)\VRage.Core.Game.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="VRage.DCS"><HintPath>$(EditorDir)\VRage.DCS.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="VRage.ContentPipeline"><HintPath>$(EditorDir)\VRage.ContentPipeline.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Avalonia.Base"><HintPath>$(EditorDir)\Avalonia.Base.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Avalonia.Controls"><HintPath>$(EditorDir)\Avalonia.Controls.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Pinned to the Roslyn version the editor ships (4.14.0); a different
+         major would load a second Microsoft.CodeAnalysis and fail at run time. -->
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Scripting" Version="4.14.0" />
+    <PackageReference Include="System.Drawing.Common" Version="9.0.0" />
+  </ItemGroup>
+
+</Project>

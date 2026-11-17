@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "se2-mcp"
+description = "Drydock: an MCP server for modding Space Engineers 2"
+authors = [{ name = "Heft" }]
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+license-files = ["LICENSE"]
+dynamic = ["version"]
+# 2.0 renamed FastMCP to MCPServer, which is what se2_mcp/server.py imports.
+dependencies = ["mcp>=2.0.0"]
+
+[project.urls]
+Homepage = "https://github.com/heft21/drydock-se2"
+Repository = "https://github.com/heft21/drydock-se2"
+
+[project.scripts]
+se2-mcp = "se2_mcp.__main__:main"
+
+[tool.setuptools]
+packages = ["se2_mcp"]
+
+[tool.setuptools.dynamic]
+version = { attr = "se2_mcp.__version__" }

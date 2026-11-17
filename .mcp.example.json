@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "se2-modsdk": {
+      "command": "C:\\path\\to\\python.exe",
+      "args": [
+        "-m",
+        "se2_mcp"
+      ],
+      "cwd": "C:\\path\\to\\drydock-se2",
+      "env": {
+        "PYTHONPATH": "C:\\path\\to\\drydock-se2"
+      }
+    }
+  }
+}

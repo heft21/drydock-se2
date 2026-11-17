@@ -1,0 +1,23 @@
+# derived data and local state
+.mcp.json
+cache/
+.backups/
+__pycache__/
+*.pyc
+
+# tooling leftovers
+node_modules/
+pip/
+
+# editor / OS
+.vscode/
+.idea/
+Thumbs.db
+
+# build output
+bin/
+obj/
+dist/
+*.egg-info/
+*.building-*
+build/
